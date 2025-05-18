@@ -1,5 +1,6 @@
 import rigoImageUrl from "../assets/img/rigo-baby.jpg";
 import useGlobalReducer from "../hooks/useGlobalReducer.jsx";
+import { Tab } from "../components/Tab.jsx";
 
 export const Home = () => {
 
@@ -11,6 +12,7 @@ export const Home = () => {
 			<p>
 				<img src={rigoImageUrl} />
 			</p>
+			<Tab title={'Characters'} />
 		</div>
 	);
 }; 
