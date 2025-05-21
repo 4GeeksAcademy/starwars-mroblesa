@@ -21,7 +21,7 @@ const SwiperCarousel = ({ cards }) => {
     >
       {cards.map((index) => (
         <SwiperSlide key={index}>
-          <Card title={'Cards Starwars'} text={'Texto de la card'} />
+          <Card/>
         </SwiperSlide>
       ))}
     </Swiper>

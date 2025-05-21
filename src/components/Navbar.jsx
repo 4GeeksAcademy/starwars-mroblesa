@@ -4,8 +4,8 @@ import starwars from "../assets/img/starwars.png";
 export const Navbar = () => {
 
 	return (
-		<nav className="navbar navbar-light bg-light">
-			<div className="container">
+		<nav className="navbar navbar-light bg-dark">
+			<div className="container title">
 				<Link to="/">
 					<img src={starwars} style={{ width: 100 }} />
 				</Link>
