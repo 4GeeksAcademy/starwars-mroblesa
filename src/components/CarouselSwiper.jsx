@@ -1,6 +1,5 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
-import { Card } from "./Card";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
@@ -19,9 +18,9 @@ const SwiperCarousel = ({ cards }) => {
         1024: { slidesPerView: 3 },
       }}
     >
-      {cards.map((index) => (
+      {cards.map((card, index) => (
         <SwiperSlide key={index}>
-          <Card/>
+          {card}
         </SwiperSlide>
       ))}
     </Swiper>
