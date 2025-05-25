@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import starwars from "../assets/img/starwars.png";
+import { FavoritesDropdown } from "./FavoritesDropdown";
+
 
 export const Navbar = () => {
 
@@ -9,14 +11,7 @@ export const Navbar = () => {
 				<Link to="/">
 					<img src={starwars} style={{ width: 100 }} />
 				</Link>
-				<div className="ml-auto dropdown">
-					<button className="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown">Favorites</button>
-					<ul className="dropdown-menu">
-						<li><a className="dropdown-item" href="#">Action</a></li>
-						<li><a className="dropdown-item" href="#">Another action</a></li>
-						<li><a className="dropdown-item" href="#">Something else here</a></li>
-					</ul>
-				</div>
+				<FavoritesDropdown />
 			</div>
 		</nav>
 	);

@@ -7,8 +7,36 @@ import { CardPLanet } from "../components/CardPLanet.jsx";
 
 export const Home = () => {
 
-	const { store, dispatch } = useGlobalReducer()
+		const { store, dispatch } = useGlobalReducer()
 
+		const isFavorite = (item) => {
+		const favorites = Array.isArray(store.favorites) ? store.favorites : [];
+		return favorites.some(favorite => favorite.uid === item.uid && favorite.type === itemType);
+	}
+
+	const handleFavorite = (item, itemType) => {
+		const isCurrentlyFavorite = isFavorite(item, itemType);
+		if (isCurrentlyFavorite) {
+			dispatch({
+				type: "remove_favorite",
+				payload: {
+					type: itemType,
+					uid: item.uid
+				}
+			});
+		} else {
+			dispatch({
+				type: "add_favorite",
+				payload: {
+					data: {
+						name: item.name,
+						uid: item.uid,
+						type: itemType
+					}
+				}
+			});
+		}
+	}
 
 
 	useEffect(() => {
@@ -22,7 +50,10 @@ export const Home = () => {
 					peopleData.results.map(async (person) => {
 						const response = await fetch(person.url);
 						const data = await response.json();
-						return data.result.properties
+						return { ...data.result.properties,
+							uid: data.result.uid,
+							id: data.result.uid
+						}
 					}));
 				dispatch({ type: "get_people", payload: peopleWithDetails });
 			} catch (error) {
@@ -39,7 +70,10 @@ export const Home = () => {
 					planetsData.results.map(async (planet) => {
 						const response = await fetch(planet.url);
 						const data = await response.json();
-						return data.result.properties
+						return { ...data.result.properties,
+							uid: data.result.uid,
+							id: data.result.uid
+						}
 					}));
 				dispatch({ type: "get_planets", payload: planetsWithDetails });
 			} catch (error) {
@@ -56,7 +90,10 @@ export const Home = () => {
 					vehiclesData.results.map(async (vehicle) => {
 						const response = await fetch(vehicle.url);
 						const data = await response.json();
-						return data.result.properties
+						return { ...data.result.properties,
+							uid: data.result.uid,
+							id: data.result.uid
+						}
 					}));
 				dispatch({ type: "get_vehicles", payload: vehiclesWithDetails });
 			} catch (error) {
@@ -74,12 +111,15 @@ export const Home = () => {
 				<hr className="border border-warning border-2 opacity-100 col-md-12"></hr>
 				<CarouselSwiper cards={store.people.map((people) => (
 					<Card
-						key={people.id}
+						key={people.uid}
 						title={people.name}
 						image={people.image}
 						height={people.height}
 						gender={people.gender}
 						mass={people.mass}
+						id={people.uid}
+						type="people"
+						onFavorite={() => handleFavorite(people)}
 					/>
 				))}
 				/>
@@ -90,12 +130,15 @@ export const Home = () => {
 				<hr className="border border-warning border-2 opacity-100 col-md-12"></hr>
 				<CarouselSwiper cards={store.planets.map((planet) => (
 					<CardPLanet
-						key={planet.id}
+						key={planet.uid}
 						title={planet.name}
 						image={planet.image}
 						diameter={planet.diameter}
 						gravity={planet.gravity}
 						population={planet.population}
+						id={planet.uid}
+						type="planet"
+
 					/>
 				))} />
 			</div>
@@ -105,12 +148,14 @@ export const Home = () => {
 				<hr className="border border-warning border-2 opacity-100 col-md-12"></hr>
 				<CarouselSwiper cards={store.vehicles.map((vehicle) => (
 					<CardVehicles
-						key={vehicle.id}
+						key={vehicle.uid}
 						title={vehicle.name}
 						image={vehicle.image}
 						model={vehicle.model}
 						manufacturer={vehicle.manufacturer}
 						crew={vehicle.crew}
+						id={vehicle.uid}
+						type="vehicle"
 					/>))} />
 				<hr className="border border-warning border-2 opacity-100 col-md-12"></hr>
 			</div>

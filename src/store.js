@@ -1,5 +1,5 @@
-export const initialStore=()=>{
-  return{
+export const initialStore = () => {
+  return {
     people: [],
     planets: [],
     vehicles: [],
@@ -8,27 +8,39 @@ export const initialStore=()=>{
 }
 
 export default function storeReducer(store, action = {}) {
-  switch(action.type){
+  switch (action.type) {
     case 'get_people':
-      const  people  = action.payload;
+      const people = action.payload;
       return {
         ...store,
         people: people
       }
     case 'get_planets':
-      const  planets  = action.payload;
+      const planets = action.payload;
       return {
         ...store,
         planets: planets
       }
     case 'get_vehicles':
-      const  vehicles  = action.payload;
+      const vehicles = action.payload;
       return {
         ...store,
         vehicles: vehicles
       }
+    case 'add_favorite':
+      return {
+        ...store,
+        favorites: [...store.favorites, action.payload.data]
+      }
 
-      default:
-        return store;
+    case 'remove_favorite':
+      const { uid, type } = action.payload;
+      return {
+        ...store,
+        favorites: store.favorites.filter(favorite =>!(favorite.uid === uid && favorite.type === type)
+    )};
+
+    default:
+      return store;
   }
 }

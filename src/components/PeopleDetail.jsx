@@ -1,4 +1,19 @@
+import React, { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
 export const PeopleDetail = ({ data }) => {
+    const { id } = useParams();
+
+  useEffect(() => {
+    
+    const fetchData = async () => {
+      const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
+        const result = await response.json();   
+   
+      
+    };
+    fetchData();
+  }, [id]);
   return (
     <div className="container title">
             <div>
