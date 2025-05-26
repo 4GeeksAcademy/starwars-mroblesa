@@ -51,8 +51,7 @@ export const Home = () => {
 						const response = await fetch(person.url);
 						const data = await response.json();
 						return { ...data.result.properties,
-							uid: data.result.uid,
-							id: data.result.uid
+							uid: data.result.uid
 						}
 					}));
 				dispatch({ type: "get_people", payload: peopleWithDetails });
@@ -71,8 +70,7 @@ export const Home = () => {
 						const response = await fetch(planet.url);
 						const data = await response.json();
 						return { ...data.result.properties,
-							uid: data.result.uid,
-							id: data.result.uid
+							uid: data.result.uid
 						}
 					}));
 				dispatch({ type: "get_planets", payload: planetsWithDetails });
@@ -91,8 +89,7 @@ export const Home = () => {
 						const response = await fetch(vehicle.url);
 						const data = await response.json();
 						return { ...data.result.properties,
-							uid: data.result.uid,
-							id: data.result.uid
+							uid: data.result.uid
 						}
 					}));
 				dispatch({ type: "get_vehicles", payload: vehiclesWithDetails });
@@ -117,7 +114,7 @@ export const Home = () => {
 						height={people.height}
 						gender={people.gender}
 						mass={people.mass}
-						id={people.uid}
+						uid={people.uid}
 						type="people"
 						onFavorite={() => handleFavorite(people)}
 					/>
@@ -136,7 +133,7 @@ export const Home = () => {
 						diameter={planet.diameter}
 						gravity={planet.gravity}
 						population={planet.population}
-						id={planet.uid}
+						uid={planet.uid}
 						type="planet"
 
 					/>
@@ -154,7 +151,7 @@ export const Home = () => {
 						model={vehicle.model}
 						manufacturer={vehicle.manufacturer}
 						crew={vehicle.crew}
-						id={vehicle.uid}
+						uid={vehicle.uid}
 						type="vehicle"
 					/>))} />
 				<hr className="border border-warning border-2 opacity-100 col-md-12"></hr>

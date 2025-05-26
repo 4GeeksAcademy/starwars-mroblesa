@@ -1,6 +1,25 @@
-export const VehiclesDetail = ({ data }) => {
-  return (
-    <div className="container title">
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+
+
+export const VehiclesDetail = () => {
+    const { id } = useParams();
+    const [data, setData] = useState()
+
+    useEffect(() => {
+
+
+        const fetchData = async () => {
+            const response = await fetch(`https://www.swapi.tech/api/vehicles/${id}`);
+            const result = await response.json();
+            setData(result.result.properties);
+
+        };
+        fetchData();
+    }, [id]);
+    return (
+        <div className="container title">
             <div>
                 <img src={data.image} className="rounded float-start" alt="..." style={{ width: 600 }} />
             </div>
@@ -38,6 +57,6 @@ export const VehiclesDetail = ({ data }) => {
                 </div>
             </div>
         </div>
-  );
+    );
 };
 export default VehiclesDetail;

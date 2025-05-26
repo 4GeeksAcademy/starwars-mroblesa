@@ -1,6 +1,25 @@
-export const PlanetDetail = ({ data }) => {
-  return (
-    <div className="container title">
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import { useState } from 'react';
+
+export const PlanetDetail = () => {
+    const { id } = useParams();
+    const [data, setData] = useState()
+
+    useEffect(() => {
+
+
+        const fetchData = async () => {
+            const response = await fetch(`https://www.swapi.tech/api/planets/${id}`);
+            const result = await response.json();
+            setData(result.result.properties);
+
+        };
+        fetchData();
+    }, [id]);
+
+    return (
+        <div className="container title">
             <div>
                 <img src={data.image} className="rounded float-start" alt="..." style={{ width: 600 }} />
             </div>
@@ -17,7 +36,7 @@ export const PlanetDetail = ({ data }) => {
                     </div>
                     <div className="col  border-2 border-warning border-start">
                         <h6>Gravity </h6>
-                        <p>{data.gravity }</p>
+                        <p>{data.gravity}</p>
                     </div>
                     <div className="col  border-2 border-warning border-start">
                         <h6>Population</h6>
@@ -38,6 +57,6 @@ export const PlanetDetail = ({ data }) => {
                 </div>
             </div>
         </div>
-  );
+    );
 };
 export default PlanetDetail;

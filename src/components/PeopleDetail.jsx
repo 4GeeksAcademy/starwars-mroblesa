@@ -1,15 +1,18 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import { useState } from 'react';
 
-export const PeopleDetail = ({ data }) => {
+export const PeopleDetail = () => {
     const { id } = useParams();
+    const [data, setData] = useState()
 
   useEffect(() => {
     
+
     const fetchData = async () => {
       const response = await fetch(`https://www.swapi.tech/api/people/${id}`);
         const result = await response.json();   
-   
+        setData(result.result.properties);
       
     };
     fetchData();
