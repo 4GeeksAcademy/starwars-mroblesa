@@ -2,9 +2,11 @@ import  useGlobalReducer  from '../hooks/useGlobalReducer';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 
+
 export const FavoritesDropdown = () => {
     const { store, dispatch } = useGlobalReducer();
-
+    const { favorites } = store;
+    console.log(store);
     const handleRemoveFavorite = (uid, type) => {
         dispatch({
             type: "remove_favorite",

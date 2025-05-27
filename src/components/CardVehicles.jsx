@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
-export const CardVehicles = ({ title, image, model, manufacturer, crew, uid, type }) => {
+export const CardVehicles = ({ title, onFavorite, isFavorite, image, model, manufacturer, crew, uid, type }) => {
   const navigate = useNavigate();
   const handleLearnMore = (event) => {
     event.preventDefault();
@@ -18,7 +18,7 @@ export const CardVehicles = ({ title, image, model, manufacturer, crew, uid, typ
           <p className="card-text">Manufacturer:{manufacturer}</p>
           <p className="card-text">Crew:{crew}</p>
           <button onClick={handleLearnMore} className="btn btn-primary float-start ">Learn more!</button>
-          <button onFavorite={() => handleFavorite(vehicle, "vehicle")} className="btn btn-primary float-end"><FontAwesomeIcon icon={faHeart} /></button>
+          <button onClick={onFavorite} className="btn btn-primary float-end"><FontAwesomeIcon icon={faHeart} /></button>
         </div>
       </div>
     </div>

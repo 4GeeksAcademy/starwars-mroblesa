@@ -1,6 +1,7 @@
 import { PeopleDetail } from "./../components/PeopleDetail";
 import { PlanetDetail } from "./../components/PlanetDetail";
 import { VehiclesDetail } from "./../components/VehiclesDetail";
+import { useParams } from "react-router-dom";
 
 export const DetailWrapper = () => {
   const { type, id } = useParams();

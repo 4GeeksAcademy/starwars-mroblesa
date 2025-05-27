@@ -18,39 +18,43 @@ export const VehiclesDetail = () => {
         };
         fetchData();
     }, [id]);
+if (!data) {
+        return <div className="alert text-center alert-warning">Loading...</div>;
+    }
+
     return (
         <div className="container title">
             <div>
                 <img src={data.image} className="rounded float-start" alt="..." style={{ width: 600 }} />
             </div>
-            <div className="text-center text m-4 my-4">
+            <div className="text-center fw-bolder text m-4 my-4">
                 <h1>{data.name}</h1>
-                <p className="text-justify text m-4">{about}</p>
+                <p className="text-justify text m-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
             </div>
             <hr className="border border-warning border-2 opacity-100 col-md-12"></hr>
             <div className="container text-center text">
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-6">
-                    <div className="col border-2 border-warning border-start">
+                    <div className="col fw-bolder border-2 border-warning border-start">
                         <h6>Consumables</h6>
                         <p className="detail-text">{data.consumables}</p>
                     </div>
-                    <div className="col  border-2 border-warning border-start">
+                    <div className="col fw-bolder border-2 border-warning border-start">
                         <h6>Crew</h6>
                         <p>{data.crew}</p>
                     </div>
-                    <div className="col  border-2 border-warning border-start">
+                    <div className="col fw-bolder border-2 border-warning border-start">
                         <h6>Model</h6>
                         <p>{data.model}</p>
                     </div>
-                    <div classNames="col  border-2 border-warning border-start">
+                    <div className="col fw-bolder border-2 border-warning border-start">
                         <h6>Passengers</h6>
                         <p>{data.passengers}</p>
                     </div>
-                    <div className="col  border-2 border-warning border-start">
+                    <div className="col fw-bolder border-2 border-warning border-start">
                         <h6>Vehicle Class</h6>
                         <p>{data.vehicle_class}</p>
                     </div>
-                    <div className="col border-end border-2 border-warning border-start">
+                    <div className="col fw-bolder border-end border-2 border-warning border-start">
                         <h6>Manufacturer</h6>
                         <p>{data.manufacturer}</p>
                     </div>

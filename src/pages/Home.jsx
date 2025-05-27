@@ -8,36 +8,35 @@ import { CardPLanet } from "../components/CardPLanet.jsx";
 export const Home = () => {
 
 		const { store, dispatch } = useGlobalReducer()
-
-		const isFavorite = (item) => {
-		const favorites = Array.isArray(store.favorites) ? store.favorites : [];
-		return favorites.some(favorite => favorite.uid === item.uid && favorite.type === itemType);
-	}
-
-	const handleFavorite = (item, itemType) => {
-		const isCurrentlyFavorite = isFavorite(item, itemType);
-		if (isCurrentlyFavorite) {
-			dispatch({
-				type: "remove_favorite",
-				payload: {
+ 
+			  const isFavorite = (item, itemType) => {
+			  const favorites = Array.isArray(store.favorites) ? store.favorites : [];
+			  return favorites.some(favorite => favorite.uid === item.uid && favorite.type === itemType);
+			}
+		  
+			const handleFavorite = (item, itemType) => {
+			  const isCurrentlyFavorite = isFavorite(item, itemType);
+			  if (isCurrentlyFavorite) {
+				dispatch({
+				  type: "remove_favorite",
+				  payload: {
 					type: itemType,
 					uid: item.uid
-				}
-			});
-		} else {
-			dispatch({
-				type: "add_favorite",
-				payload: {
+				  }
+				});
+			  } else {
+				dispatch({
+				  type: "add_favorite",
+				  payload: {
 					data: {
-						name: item.name,
-						uid: item.uid,
-						type: itemType
+					  name: item.name,
+					  uid: item.uid,
+					  type: itemType
 					}
-				}
-			});
-		}
-	}
-
+				  }
+				});
+			  }
+			}
 
 	useEffect(() => {
 
@@ -116,7 +115,8 @@ export const Home = () => {
 						mass={people.mass}
 						uid={people.uid}
 						type="people"
-						onFavorite={() => handleFavorite(people)}
+						onFavorite={() => handleFavorite(people, "people")}
+						isFavorite={isFavorite(people, "people")}
 					/>
 				))}
 				/>
@@ -135,6 +135,8 @@ export const Home = () => {
 						population={planet.population}
 						uid={planet.uid}
 						type="planet"
+						onFavorite={() => handleFavorite(planet, "planet")}
+						isFavorite={isFavorite(planet, "planet")}
 
 					/>
 				))} />
@@ -153,6 +155,8 @@ export const Home = () => {
 						crew={vehicle.crew}
 						uid={vehicle.uid}
 						type="vehicle"
+						onFavorite={()=>handleFavorite(vehicle, "vehicle")}
+						isFavorite={isFavorite(vehicle, "vehicle")}
 					/>))} />
 				<hr className="border border-warning border-2 opacity-100 col-md-12"></hr>
 			</div>
